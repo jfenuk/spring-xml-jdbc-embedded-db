@@ -1,10 +1,4 @@
-CREATE SEQUENCE seq_employee
-MINVALUE 1
-START WITH 1
-INCREMENT BY 1
-CACHE 10;
-
 CREATE  TABLE EMPLOYEE(  
-ID number(10) NOT NULL,  
-NAME varchar2(100),  
-SALARY number(10));  
+ID int IDENTITY PRIMARY KEY,  
+NAME varchar(100),  
+SALARY int);  
