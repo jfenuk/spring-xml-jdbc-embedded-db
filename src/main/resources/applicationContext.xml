@@ -26,7 +26,7 @@ http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 <jdbc:script location="classpath:/sql/init_schema.sql"/>
 </jdbc:initialize-database>
  -->
-<bean id="eDao" class="com.fenuk.example.dao.EmployeeDao">
+<bean id="eDao" class="com.fenuk.example.repository.EmployeeJdbcRepository">
 <property name="jdbcTemplate" ref="jdbcTemplate"></property>
 </bean>
 

@@ -5,8 +5,8 @@ import org.apache.commons.lang3.RandomUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.fenuk.example.dao.EmployeeDao;
 import com.fenuk.example.model.Employee;
+import com.fenuk.example.repository.EmployeeJdbcRepository;
 
 public class App {
 
@@ -14,20 +14,20 @@ public class App {
 
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-		EmployeeDao dao = (EmployeeDao) context.getBean(EmployeeDao.class);
-		
-		for (int i = 0; i<10;  i++){
-			
-			String name = RandomStringUtils.randomAlphabetic(5);
-			long salary = RandomUtils.nextLong(0, 10000);
-			
-			dao.saveEmployee(new Employee(name, salary));
-			Employee e = dao.getEmployeeByName(name);
+		EmployeeJdbcRepository employeeRepository = (EmployeeJdbcRepository) context
+				.getBean(EmployeeJdbcRepository.class);
 
-			System.out.println(e);
+		for (int i = 0; i < 10; i++) {
+			String name = RandomStringUtils.randomAlphabetic(10);
+			long salary = RandomUtils.nextLong(0, 100000);
+			Employee e = new Employee(name, salary);
+			employeeRepository.save(e);
 			
+			e = employeeRepository.getByName(name);
+
+			System.out.println(i + ": " + e);
 		}
-		
+
 	}
 
 }
